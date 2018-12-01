@@ -46,7 +46,11 @@ public class Server extends Thread {
       try{
          Scanner sc = new Scanner(file);
          while(sc.hasNextLine()){
-            System.out.println(sc.nextLine());
+            lines[] = sc.nextLine();
+            for (i=0; i < lines.length()-1; i++ ){
+               System.ot.println(lines.get(i));
+            }
+            System.out.println();
          }
       } catch (IOException e) {
          e.printStackTrace();
