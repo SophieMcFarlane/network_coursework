@@ -46,9 +46,9 @@ public class Server extends Thread {
       try{
          Scanner sc = new Scanner(file);
          while(sc.hasNextLine()){
-            String lines[] = sc.nextLine();
+            String[] lines = sc.nextLine();
             for (i=0; i < lines.length()-1; i++ ){
-               System.ot.println(lines.get(i));
+               System.out.println(lines.get(i));
             }
             System.out.println();
          }
