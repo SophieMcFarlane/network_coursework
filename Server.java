@@ -49,6 +49,7 @@ public class Server extends Thread {
 
          BufferedReader bufferedReader = new BufferedReader(fileReader);
          List<String> lines = new ArrayList<String>();
+         List<String> titles = new ArrayList<String>();
          String line = null;
 
          while((line = bufferedReader.readLine()) != null){
@@ -58,16 +59,14 @@ public class Server extends Thread {
          bufferedReader.close();
 
          for(int i=0; i<lines.size(); i++){
-            System.out.println(lines.get(i));
+            String sub = (lines.get(i)).substring(4);
+            titles.add(sub);
          }
-         //Scanner sc = new Scanner(file);
-         //while(sc.hasNextLine()){
-            //String[] lines = sc.nextLine();
-            //for (i=0; i < lines.length()-1; i++ ){
-               //System.out.println(lines.get(i));
-            //}
-            //System.out.println();
-         //}
+
+         for(int i=0; i<titles.size(); i++){
+            System.out.println(titles.get(i));
+         }
+         
       } catch (IOException e) {
          e.printStackTrace();
       }
