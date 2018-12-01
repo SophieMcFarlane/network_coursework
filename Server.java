@@ -59,14 +59,14 @@ public class Server extends Thread {
          bufferedReader.close();
 
          for(int i=0; i<lines.size(); i++){
-            String sub = (lines.get(i)).substring(4);
+            String sub = lines.get(i).substring(4);
             titles.add(sub);
          }
 
          for(int i=0; i<titles.size(); i++){
             System.out.println(titles.get(i));
          }
-         
+
       } catch (IOException e) {
          e.printStackTrace();
       }
