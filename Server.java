@@ -1,5 +1,6 @@
 import java.net.*;
 import java.io.*;
+import java.util.*;
 
 public class Server extends Thread {
    private ServerSocket serverSocket;
@@ -19,6 +20,8 @@ public class Server extends Thread {
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
             DataInputStream in = new DataInputStream(server.getInputStream());
             
+
+
             System.out.println(in.readUTF());
             DataOutputStream out = new DataOutputStream(server.getOutputStream());
             out.writeUTF("Thank you for connecting to " + server.getLocalSocketAddress()
@@ -37,6 +40,11 @@ public class Server extends Thread {
    
    public static void main(String [] args) {
       int port = Integer.parseInt(args[0]);
+      File file = new File("100worst.txt");
+      Scanner sc = new Scanner(file);
+      while (sc.hasNextLine()){
+         System.out.println(sc.nextLine());
+      }
       try {
          Thread t = new Server(port);
          t.start();
