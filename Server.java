@@ -44,14 +44,30 @@ public class Server extends Thread {
       File file = new File("100worst.txt");
 
       try{
-         Scanner sc = new Scanner(file);
-         while(sc.hasNextLine()){
-            String[] lines = sc.nextLine();
-            for (i=0; i < lines.length()-1; i++ ){
-               System.out.println(lines.get(i));
-            }
-            System.out.println();
+
+         FileReader fileReader = new FileReader(file);
+
+         BufferedReader bufferedReader = new BufferedReader(fileReader);
+         List<String> lines = new ArrayList<String>();
+         String line = null;
+
+         while((line = bufferedReader.readLine()) != null){
+            lines.add(line);
          }
+
+         bufferedReader.close();
+
+         for(int i=0, i<lines.size(); i++){
+            System.out.println(models.get(i));
+         }
+         //Scanner sc = new Scanner(file);
+         //while(sc.hasNextLine()){
+            //String[] lines = sc.nextLine();
+            //for (i=0; i < lines.length()-1; i++ ){
+               //System.out.println(lines.get(i));
+            //}
+            //System.out.println();
+         //}
       } catch (IOException e) {
          e.printStackTrace();
       }
