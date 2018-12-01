@@ -41,9 +41,14 @@ public class Server extends Thread {
    public static void main(String [] args) {
       int port = Integer.parseInt(args[0]);
       File file = new File("100worst.txt");
-      Scanner sc = new Scanner(file);
-      while (sc.hasNextLine()){
-         System.out.println(sc.nextLine());
+
+      try{
+         Scanner sc = new Scanner(file);
+         while(sc.hasNextLine()){
+            System.out.println(sc.nexLine());
+         }
+      } catch (IOException e) {
+         e.printStackTrace();
       }
       try {
          Thread t = new Server(port);
