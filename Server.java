@@ -59,7 +59,7 @@ public class Server extends Thread {
          bufferedReader.close();
 
          for(int i=0; i<lines.size(); i++){
-            String sub = lines.get(i).split("-");
+            String sub = (lines.get(i)).split("-");
             titles.add(sub);
          }
 
