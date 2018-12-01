@@ -1,6 +1,7 @@
 import java.net.*;
 import java.io.*;
 import java.util.*;
+import java.util.Scanner;
 
 public class Server extends Thread {
    private ServerSocket serverSocket;
@@ -45,7 +46,7 @@ public class Server extends Thread {
       try{
          Scanner sc = new Scanner(file);
          while(sc.hasNextLine()){
-            System.out.println(sc.nexLine());
+            System.out.println(sc.nextLine());
          }
       } catch (IOException e) {
          e.printStackTrace();
