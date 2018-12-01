@@ -57,7 +57,7 @@ public class Server extends Thread {
 
          bufferedReader.close();
 
-         for(int i=0, i<lines.size(); i++){
+         for(int i=0; i<lines.size(); i++){
             System.out.println(models.get(i));
          }
          //Scanner sc = new Scanner(file);
