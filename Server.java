@@ -59,7 +59,7 @@ public class Server extends Thread {
 
          bufferedReader.close();
 
-         for(int i=0; i<5; i++){
+         for(int i=0; i<6; i++){
            lines.remove(0);
          }
 
