@@ -54,7 +54,6 @@ public class Server extends Thread {
          BufferedReader bufferedReader = new BufferedReader(fileReader);
          List<String> lines = new ArrayList<String>();
          List<String> titles = new ArrayList<String>();
-         List<String> splitString = new ArrayList<String>();
          String line = null;
 
          while((line = bufferedReader.readLine()) != null){
@@ -73,7 +72,7 @@ public class Server extends Thread {
 
          for(int i=0; i<lines.size(); i++){
            String temp = lines.get(i);
-           splitString = temp.split("\\s+\\s");
+           String[] splitString = temp.split("\\s+\\s");
            for(int j=0; j<splitString.length()-1; j++){
              System.out.println(splitString.get(i));
            }
