@@ -59,7 +59,9 @@ public class Server extends Thread {
 
          bufferedReader.close();
 
-         lines.remove(0,1,2,3,4);
+         for(int i=0; i<5; i++){
+           lines.remove(0);
+         }
 
          for(int i=0; i<lines.size(); i++){
             System.out.println(lines.get(i));
