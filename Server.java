@@ -54,7 +54,6 @@ public class Server extends Thread {
          BufferedReader bufferedReader = new BufferedReader(fileReader);
          List<String> lines = new ArrayList<String>();
          List<String> titles = new ArrayList<String>();
-         List<ArrayList> splitString = new ArrayList<ArrayList>();
          Map<String, String> info = new HashMap<String, String>();
          String line = null;
 
