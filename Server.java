@@ -55,7 +55,7 @@ public class Server extends Thread {
          List<String> lines = new ArrayList<String>();
          List<String> titles = new ArrayList<String>();
          List<ArrayList> splitString = new ArrayList<ArrayList>();
-         Map<String, String, String> info = new HashMap<String, String, String>();
+         Map<String, String> info = new HashMap<String, String>();
          String line = null;
 
          while((line = bufferedReader.readLine()) != null){
@@ -76,7 +76,7 @@ public class Server extends Thread {
            String temp = lines.get(i);
            splitString.add(temp.split("\\s+\\s"));
            for(int j=0; j<splitString.length()-1; j++){
-             info.put(splitString.get(0), splitString.get(1), splitString(2));
+             info.put(splitString.get(0), splitString.get(1));
            }
          }
 
