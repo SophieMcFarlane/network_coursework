@@ -63,6 +63,10 @@ public class Server extends Thread {
            lines.remove(0);
          }
 
+         for(int i=0; i<23; i++){
+           lines.remove(lines.size()-1);
+         }
+
          for(int i=0; i<lines.size(); i++){
             System.out.println(lines.get(i));
          }
