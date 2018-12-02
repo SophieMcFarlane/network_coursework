@@ -23,6 +23,9 @@ public class Server extends Thread {
 
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
             DataInputStream in = new DataInputStream(server.getInputStream());
+            BufferedReader is = new BufferedReader(new InputStreamReader(in));
+            String name = is.readLine();
+            String artist = is.readLine();
 
 
 
@@ -74,6 +77,7 @@ public class Server extends Thread {
          for(int i=0; i<lines.size(); i++){
            String temp = lines.get(i);
            String[] splitString = temp.split("\\s+\\s");
+           //doesn't like the methods on splitString
            for(int j=0; j<splitString.getLength()-1; j++){
              info.put(splitString.get(0), splitString.get(1));
            }
