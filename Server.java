@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class Server extends Thread {
    private ServerSocket serverSocket;
+   private String name;
+   private String artist;
 
    public Server(int port) throws IOException {
       serverSocket = new ServerSocket(port);
@@ -24,8 +26,11 @@ public class Server extends Thread {
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
             DataInputStream in = new DataInputStream(server.getInputStream());
             BufferedReader is = new BufferedReader(new InputStreamReader(in));
-            String name = is.readLine();
-            String artist = is.readLine();
+            name = is.readLine();
+            artist = is.readLine();
+
+            System.out.println("The name is: "+ name);
+            System.out.println("The artist is: "+ artist);
 
 
 
