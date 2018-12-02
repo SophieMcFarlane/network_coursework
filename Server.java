@@ -69,7 +69,7 @@ public class Server extends Thread {
          }
 
          for(int i=0; i<lines.size(); i++){
-           String[] splitString = ((lines.get(i)).split(\s+\s));
+           String[] splitString = ((lines.get(i)).split("\s+\s"));
            for(int i=0; i<splitString.size(); i++){
              System.out.println(splitString.get(i));
            })
