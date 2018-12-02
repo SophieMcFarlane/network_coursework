@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Server extends Thread {
    private ServerSocket serverSocket;
-   
+
    public Server(int port) throws IOException {
       serverSocket = new ServerSocket(port);
       serverSocket.setSoTimeout(10000);
@@ -14,13 +14,13 @@ public class Server extends Thread {
    public void run() {
       while(true) {
          try {
-            System.out.println("Waiting for client on port " + 
+            System.out.println("Waiting for client on port " +
                serverSocket.getLocalPort() + "...");
             Socket server = serverSocket.accept();
-            
+
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
             DataInputStream in = new DataInputStream(server.getInputStream());
-            
+
 
 
             System.out.println(in.readUTF());
@@ -29,7 +29,7 @@ public class Server extends Thread {
                );
             out.writeUTF("Request has been recieved successfully");
             server.close();
-            
+
          } catch (SocketTimeoutException s) {
             System.out.println("Socket timed out!");
             break;
@@ -39,7 +39,7 @@ public class Server extends Thread {
          }
       }
    }
-   
+
    public static void main(String [] args) {
       int port = Integer.parseInt(args[0]);
       File file = new File("100worst.txt");
@@ -59,13 +59,12 @@ public class Server extends Thread {
 
          bufferedReader.close();
 
-         for(int i=0; i<lines.size(); i++){
-            String sub = (lines.get(i)).split("-");
-            titles.add(sub);
+         for(int i=0; i<5; i++){
+           lines.remove(i);
          }
 
-         for(int i=0; i<titles.size(); i++){
-            System.out.println(titles.get(i));
+         for(int i=0; i<lines.size(); i++){
+            System.out.println(lines.get(i));
          }
 
       } catch (IOException e) {
