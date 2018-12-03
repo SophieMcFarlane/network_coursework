@@ -90,7 +90,7 @@ public class Server extends Thread {
              System.out.println("The start is: "+start+ " The end is: "+end);
              if(start == 0){
                int n = lines.indexOf(i);
-               System.out.println(**"The index is: "+n);
+               System.out.println("**The index is: "+n);
              }
            }
 
