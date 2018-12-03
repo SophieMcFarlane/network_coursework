@@ -100,7 +100,6 @@ public class Server extends Thread {
            //for(int j=0; j<splitString.getLength()-1; j++){
              //info.put(splitString.get(0), splitString.get(1));
            //}
-         }
 
       } catch (IOException e) {
          e.printStackTrace();
