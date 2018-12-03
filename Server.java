@@ -87,12 +87,12 @@ public class Server extends Thread {
            if(m.find()){
              int end = m.end();
              int start = m.start();
-             System.out.println("The start is: "+start+ " The end is: "+end);
+             //System.out.println("The start is: "+start+ " The end is: "+end);
              if(start == 0){
                String t = lines.get(i-1);
                lines.remove(temp);
                lines.set(i-1, (t+temp));
-               System.out.println(t);
+               System.out.println(lines.get(i-1));
                }
              }
            }
