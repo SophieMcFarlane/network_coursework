@@ -96,7 +96,7 @@ public class Server extends Thread {
                }
                String s = temp.substring(0,start);
                String ss = temp.substring(end);
-               //String sss = ss.substring(0, s.length()-4);
+               String sss = ss.substring(0, ss.length()-4);
                System.out.println(s);
                System.out.println(ss);
              }
