@@ -91,10 +91,10 @@ public class Server extends Thread {
              if(start == 0){
                String t = lines.get(i-1);
                lines.remove(temp);
-               System.out.println(t+temp);
+               //System.out.println(t+temp);
                lines.set(i-1, (t+temp));
                System.out.println(lines.get(i-1));
-               //System.out.println(lines.get(i-1));
+               System.out.println(lines.get(i));
                }
                String s = temp.substring(0,start);
                //String ss = s.substring(4);
