@@ -95,10 +95,11 @@ public class Server extends Thread {
                //System.out.println(lines.get(i-1));
                }
                String s = temp.substring(0,start);
-               String ss = temp.substring(end);
-               String sss = ss.substring(0, ss.length()-4);
-               System.out.println(s);
-               System.out.println(sss);
+               String ss = temp.substring(4,start);
+               String sss = temp.substring(end);
+               String ssss = sss.substring(0, sss.length()-4);
+               System.out.println(ss);
+               System.out.println(ssss);
              }
            }
 
