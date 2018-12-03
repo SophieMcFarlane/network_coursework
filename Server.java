@@ -10,7 +10,7 @@ public class Server extends Thread {
    private ServerSocket serverSocket;
    private String name;
    private String artist;
-   Map<String, String> info = new HashMap<String, String>();
+   private Map<String, String> info = new HashMap<String, String>();
 
    public Server(int port) throws IOException {
       serverSocket = new ServerSocket(port);
@@ -26,13 +26,13 @@ public class Server extends Thread {
 
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
             DataInputStream in = new DataInputStream(server.getInputStream());
-            BufferedReader is = new BufferedReader(new InputStreamReader(in));
-            name = is.readLine();
-            artist = is.readLine();
-            info.get(artist);
+            //BufferedReader is = new BufferedReader(new InputStreamReader(in));
+            //name = is.readLine();
+            //artist = is.readLine();
+            //info.get(artist);
 
-            System.out.println("The name is: "+ name);
-            System.out.println("The artist is: "+ artist);
+            //System.out.println("The name is: "+ name);
+            //System.out.println("The artist is: "+ artist);
 
 
 
@@ -53,7 +53,7 @@ public class Server extends Thread {
       }
    }
 
-   public static void main(String [] args) {
+   public static void main(String [] args) throws Exception {
       int port = Integer.parseInt(args[0]);
       File file = new File("100worst.txt");
 
@@ -94,25 +94,28 @@ public class Server extends Thread {
                String t = lines.get(i-1);
                String tt = lines.get(i);
                String ttt = t+tt;
-               System.out.println(ttt);
-               lines.add(i-1, (ttt));
+               //System.out.println(ttt);
                lines.remove(i-1);
-               lines.remove(i);
-
-               }
-               int start2 = m.start();
-               int end2 = m.end();
+               lines.add(i, (ttt));
+               //lines.remove(i);
+             }
                //System.out.println(lines.get(i));
-               //String s = lines.get(i).substring(0,start2);
-               //String ss = s.substring(4);
-               String sss = lines.get(i).substring(end);
-               //String ssss = sss.substring(0, sss.length()-4);
-               //System.out.println(s);
-               System.out.println(sss);
-               //info.put(ssss,ss);
+               //need to use start of the line before or resuse matcher and pattern
+                   Pattern pp = Pattern.compile("\\s+\\s");
+                   Matcher mm = pp.matcher(lines.get(i));
+                   if(mm.find()){
+                   //System.out.println(lines.get(i));
+                   int start2 = mm.start();
+                   int end2 = mm.end();
+                   //System.out.println(start2);
+                   String s = lines.get(i).substring(0,start2);
+                   String ss = s.substring(4);
+                   String sss = lines.get(i).substring(end2);
+                   String ssss = sss.substring(0, sss.length()-4);
+                   //info.put(ssss,ss);
+                 }
              }
            }
-
       } catch (IOException e) {
          e.printStackTrace();
       }
