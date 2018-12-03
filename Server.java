@@ -88,8 +88,8 @@ public class Server extends Thread {
            int start = m.start();
            while(m.find()){
              if(start == 0){
-               int i = lines.indexOf(i);
-               System.out.println("The index is: "+i);
+               int n = lines.indexOf(i);
+               System.out.println("The index is: "+n);
              }
            }
 
