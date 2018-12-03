@@ -84,10 +84,13 @@ public class Server extends Thread {
            Pattern p = Pattern.compile("\\s+\\s");
            Matcher m = p.matcher(temp);
            List<String> stuff = new ArrayList<String>();
+           int end = m.end();
+           int start = m.start();
            while(m.find()){
-             int end = m.end();
-             int start = m.start();
-             System.out.println("The start is : "+start+" The end is: "+end);
+             if(start == 0){
+               int i = lines.indexOf(i);
+               System.out.println("The index is: "+i);
+             }
            }
 
            //for(int j=0; j<splitString.getLength()-1; j++){
