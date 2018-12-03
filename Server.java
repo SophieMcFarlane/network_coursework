@@ -84,9 +84,9 @@ public class Server extends Thread {
            Pattern p = Pattern.compile("\\s+\\s");
            Matcher m = p.matcher(temp);
            List<String> stuff = new ArrayList<String>();
-           int end = m.end();
-           int start = m.start();
-           while(m.find()){
+           if(m.find()){
+             int end = m.end();
+             int start = m.start();
              if(start == 0){
                int n = lines.indexOf(i);
                System.out.println("The index is: "+n);
