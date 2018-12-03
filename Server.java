@@ -82,7 +82,7 @@ public class Server extends Thread {
          for(int i=0; i<lines.size(); i++){
            String temp = lines.get(i);
            Pattern p = Pattern.compile("\\s+\\s");
-           Matcher m = p.m(temp);
+           Matcher m = p.matcher(temp);
            List<String> stuff = new ArrayList<String>();
            while(m.find()){
              int end = m.end();
