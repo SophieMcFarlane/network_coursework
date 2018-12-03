@@ -91,6 +91,7 @@ public class Server extends Thread {
              if(start == 0){
                String t = lines.get(i-1);
                lines.remove(temp);
+               System.out.println(t+temp);
                lines.set(i-1, (t+temp));
                //System.out.println(lines.get(i-1));
                }
@@ -98,8 +99,8 @@ public class Server extends Thread {
                //String ss = s.substring(4);
                String sss = temp.substring(end);
                String ssss = sss.substring(0, sss.length()-4);
-               System.out.println(s);
-               System.out.println(ssss);
+               //System.out.println(s);
+               //System.out.println(ssss);
              }
            }
 
