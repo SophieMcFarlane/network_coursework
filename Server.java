@@ -81,17 +81,17 @@ public class Server extends Thread {
 
          for(int i=0; i<lines.size(); i++){
            String temp = lines.get(i);
-           Pattern p = Pattern.compile("\\s+\\s+");
+           Pattern p = Pattern.compile("\\s+\\s");
            Matcher m = p.Matcher(temp);
-           List<String> info = new ArrayList<String>();
+           List<String> stuff = new ArrayList<String>();
            while(m.find()){
              String s = m.group(1);
-             info.add(s);
+             stuff.add(s);
            }
-           //doesn't like the methods on splitString
-           for(int j=0; j<splitString.getLength()-1; j++){
-             info.put(splitString.get(0), splitString.get(1));
-           }
+
+           //for(int j=0; j<splitString.getLength()-1; j++){
+             //info.put(splitString.get(0), splitString.get(1));
+           //}
          }
 
       } catch (IOException e) {
