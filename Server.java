@@ -93,15 +93,13 @@ public class Server extends Thread {
                lines.remove(temp);
                //System.out.println(t+temp);
                lines.set(i-1, (t+temp));
-               System.out.println(lines.get(i-1));
-               System.out.println(lines.get(i));
                }
-               String s = temp.substring(0,start);
-               //String ss = s.substring(4);
-               String sss = temp.substring(end);
+               String s = lines.get(i).substring(0,start);
+               String ss = s.substring(4);
+               String sss = lines.get(i).substring(end);
                String ssss = sss.substring(0, sss.length()-4);
-               //System.out.println(s);
-               //System.out.println(ssss);
+               System.out.println(ss);
+               System.out.println(ssss);
              }
            }
 
