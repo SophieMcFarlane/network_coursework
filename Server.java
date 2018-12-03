@@ -91,6 +91,7 @@ public class Server extends Thread {
              if(start == 0){
                String t = lines.get(i-1);
                lines.remove(temp);
+               lines.remove(t);
                //System.out.println(t+temp);
                lines.set(i-1, (t+temp));
                }
