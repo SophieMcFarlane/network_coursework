@@ -10,6 +10,7 @@ public class Server extends Thread {
    private ServerSocket serverSocket;
    private String name;
    private String artist;
+   Map<String, String> info = new HashMap<String, String>();
 
    public Server(int port) throws IOException {
       serverSocket = new ServerSocket(port);
@@ -28,6 +29,7 @@ public class Server extends Thread {
             BufferedReader is = new BufferedReader(new InputStreamReader(in));
             name = is.readLine();
             artist = is.readLine();
+            info.get(artist);
 
             System.out.println("The name is: "+ name);
             System.out.println("The artist is: "+ artist);
@@ -62,7 +64,6 @@ public class Server extends Thread {
          BufferedReader bufferedReader = new BufferedReader(fileReader);
          List<String> lines = new ArrayList<String>();
          List<String> titles = new ArrayList<String>();
-         Map<String, String> info = new HashMap<String, String>();
          String line = null;
 
          while((line = bufferedReader.readLine()) != null){
@@ -84,30 +85,33 @@ public class Server extends Thread {
            Pattern p = Pattern.compile("\\s+\\s");
            Matcher m = p.matcher(temp);
            List<String> stuff = new ArrayList<String>();
+
            if(m.find()){
-             int end = m.end();
              int start = m.start();
-             //System.out.println("The start is: "+start+ " The end is: "+end);
+             int end = m.end();
+
              if(start == 0){
                String t = lines.get(i-1);
-               lines.remove(temp);
-               lines.remove(t);
-               //System.out.println(t+temp);
-               lines.set(i-1, (t+temp));
+               String tt = lines.get(i);
+               String ttt = t+tt;
+               System.out.println(ttt);
+               lines.add(i-1, (ttt));
+               lines.remove(i-1);
+               lines.remove(i);
+
                }
-               System.out.println(lines.get(i));
-               String s = lines.get(i).substring(0,start);
+               int start2 = m.start();
+               int end2 = m.end();
+               //System.out.println(lines.get(i));
+               //String s = lines.get(i).substring(0,start2);
                //String ss = s.substring(4);
                String sss = lines.get(i).substring(end);
-               String ssss = sss.substring(0, sss.length()-4);
+               //String ssss = sss.substring(0, sss.length()-4);
                //System.out.println(s);
-               //System.out.println(ssss);
+               System.out.println(sss);
+               //info.put(ssss,ss);
              }
            }
-
-           //for(int j=0; j<splitString.getLength()-1; j++){
-             //info.put(splitString.get(0), splitString.get(1));
-           //}
 
       } catch (IOException e) {
          e.printStackTrace();
