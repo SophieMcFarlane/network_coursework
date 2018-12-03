@@ -87,11 +87,10 @@ public class Server extends Thread {
            if(m.find()){
              int end = m.end();
              int start = m.start();
-             System.out.println("The start is: "+start);
-             System.out.println("The end is: "+end);
+             System.out.println("The start is: "+start+ " The end is: "+end);
              if(start == 0){
                int n = lines.indexOf(i);
-               System.out.println("The index is: "+n);
+               System.out.println(**"The index is: "+n);
              }
            }
 
