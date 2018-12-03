@@ -93,6 +93,7 @@ public class Server extends Thread {
                lines.remove(temp);
                System.out.println(t+temp);
                lines.set(i-1, (t+temp));
+               System.out.println(lines.get(i-1));
                //System.out.println(lines.get(i-1));
                }
                String s = temp.substring(0,start);
