@@ -87,8 +87,7 @@ public class Server extends Thread {
            while(m.find()){
              int end = m.end();
              int start = m.start();
-             String s = m.group(1);
-             stuff.add(s);
+             System.out.println("The start is : "+start+" The end is: "+end);
            }
 
            //for(int j=0; j<splitString.getLength()-1; j++){
