@@ -54,10 +54,10 @@ public class Server extends Thread {
 
             int temp = 0;
             System.out.println("Size is: "+info.size());
-            for(Map.Entry<String, String> entry : info.entrySet()){
+            for(Map.Entry<String, ArrayList<String>> entry : info.entrySet()){
               if(entry.getKey().equals(artist)){
                 temp += 1;
-                songs.add(entry.getValue());
+                //songs.add(entry.getValue());
               }
             }
             out.writeUTF(Integer.toString(temp));
@@ -136,8 +136,17 @@ public class Server extends Thread {
                      String sss = lines.get(i).substring(end2);
                      String ssss = sss.substring(0, sss.length()-4);
 
-                    //sort out hashmap and arraylist
-                   info.put(ssss.trim(),info.get(ss));
+                    ArrayList<String> values = info.get(ssss.trim());
+
+                    if(values == null){
+                      values = new ArrayList<String>();
+                      values.add(ss);
+                      info.put(ssss.trim(), values);
+                    }else{
+                      values.add(ss);
+                      info.put(ssss.trim(), values);
+                    }
+
                  }
              }
            }
