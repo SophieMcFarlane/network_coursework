@@ -9,7 +9,8 @@ import java.util.Scanner;
 public class Server extends Thread {
    private ServerSocket serverSocket;
    private String name;
-   private static Map<String, String> info = new HashMap<String, String>();
+   private static Map<String, ArrayList<String>> info = new HashMap<String, ArrayList<String>>();
+   private List<String> songs = new ArrayList<String>();
 
    public Server(int port) throws IOException {
       serverSocket = new ServerSocket(port);
@@ -35,7 +36,7 @@ public class Server extends Thread {
 
             System.out.println(in.readUTF());
             String artist = in.readUTF();
-            System.out.println("The artist is:" + artist+ " ");
+            System.out.println(artist);
 
             //out.wrtieUTF("The request has been received successfully")
             //Iterator it = info.entrySet().iterator();
@@ -44,16 +45,26 @@ public class Server extends Thread {
               //if(pair.getKey() == artist){
                   //System.out.println("The song title is: " + pair.getValue());
               //}
-              for(Map.Entry<String, String> entry : info.entrySet()){
-                if(entry.getKey().equals(artist)){
-                  System.out.println("The songs are: " + entry.getValue());
-                }
-              }
+
 
             DataOutputStream out = new DataOutputStream(server.getOutputStream());
             out.writeUTF("Thank you for connecting to " + server.getLocalSocketAddress()
                );
             out.writeUTF("Your request has been recieved successfully");
+
+            int temp = 0;
+            System.out.println("Size is: "+info.size());
+            for(Map.Entry<String, String> entry : info.entrySet()){
+              if(entry.getKey().equals(artist)){
+                temp += 1;
+                songs.add(entry.getValue());
+              }
+            }
+            out.writeUTF(Integer.toString(temp));
+
+            for(int i=0; i<songs.size(); i++){
+              out.writeUTF(songs.get(i));
+            }
 
             server.close();
 
@@ -125,11 +136,10 @@ public class Server extends Thread {
                      String sss = lines.get(i).substring(end2);
                      String ssss = sss.substring(0, sss.length()-4);
 
-                   info.put(ssss.trim(),ss);
+                    //sort out hashmap and arraylist
+                   info.put(ssss.trim(),info.get(ss));
                  }
-
              }
-
            }
       } catch (IOException e) {
          e.printStackTrace();

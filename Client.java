@@ -1,5 +1,6 @@
 import java.net.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class Client {
 
@@ -12,18 +13,24 @@ public class Client {
          System.out.println("Connecting to " + serverName + " on port " + port);
          Socket client = new Socket(serverName, port);
 
-         System.out.println("Just connected to " + client.getRemoteSocketAddress());
+         System.out.println("successfully connected to " + client.getRemoteSocketAddress());
          OutputStream outToServer = client.getOutputStream();
          DataOutputStream out = new DataOutputStream(outToServer);
 
          out.writeUTF("Hello from " + client.getLocalSocketAddress());
+
          out.writeUTF(artist);
+
          InputStream inFromServer = client.getInputStream();
          DataInputStream in = new DataInputStream(inFromServer);
 
-         //System.out.println(in.readUTF());
-         System.out.println("Server says " + in.readUTF());
          System.out.println(in.readUTF());
+         System.out.println(in.readUTF());
+         int limit = Integer.parseInt(in.readUTF());
+         System.out.println(limit);
+         for(int i=0; i < limit; i++){
+           System.out.println("The songs are: "+in.readUTF());
+         }
          client.close();
 
       } catch (IOException e) {
