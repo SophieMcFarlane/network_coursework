@@ -7,6 +7,7 @@ public class Client {
       String serverName = args[0];
       int port = Integer.parseInt(args[1]);
       String artist = args[2];
+
       try {
          System.out.println("Connecting to " + serverName + " on port " + port);
          Socket client = new Socket(serverName, port);
@@ -16,11 +17,14 @@ public class Client {
          DataOutputStream out = new DataOutputStream(outToServer);
 
          out.writeUTF("Hello from " + client.getLocalSocketAddress());
+         out.writeUTF(artist);
          InputStream inFromServer = client.getInputStream();
          DataInputStream in = new DataInputStream(inFromServer);
 
+         //System.out.println(in.readUTF());
          System.out.println("Server says " + in.readUTF());
          client.close();
+
       } catch (IOException e) {
          e.printStackTrace();
       }
