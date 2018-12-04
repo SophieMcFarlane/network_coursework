@@ -35,7 +35,7 @@ public class Server extends Thread {
 
             System.out.println(in.readUTF());
             String artist = in.readUTF();
-            System.out.println("The artist is:" + artist+"!");
+            System.out.println("The artist is:" + artist+ " ");
 
             //out.wrtieUTF("The request has been received successfully")
             //Iterator it = info.entrySet().iterator();
@@ -46,14 +46,14 @@ public class Server extends Thread {
               //}
               for(Map.Entry<String, String> entry : info.entrySet()){
                 if(entry.getKey().equals(artist)){
-                  System.out.println(entry.getKey()+":" + entry.getValue());
-                  //System.out.println("The songs are: " + entry.getValue());
+                  System.out.println("The songs are: " + entry.getValue());
                 }
               }
 
             DataOutputStream out = new DataOutputStream(server.getOutputStream());
             out.writeUTF("Thank you for connecting to " + server.getLocalSocketAddress()
                );
+            out.writeUTF("Your request has been recieved successfully");
 
             server.close();
 
@@ -118,15 +118,14 @@ public class Server extends Thread {
                    Pattern pp = Pattern.compile("\\s+\\s");
                    Matcher mm = pp.matcher(lines.get(i));
                    if(mm.find()){
-                   int start2 = mm.start();
-                   int end2 = mm.end();
-                   String s = lines.get(i).substring(0,start2);
-                   String ss = s.substring(4);
-                   String sss = lines.get(i).substring(end2);
-                   String ssss = sss.substring(0, sss.length()-4);
+                     int start2 = mm.start();
+                     int end2 = mm.end();
+                     String s = lines.get(i).substring(0,start2);
+                     String ss = s.substring(4);
+                     String sss = lines.get(i).substring(end2);
+                     String ssss = sss.substring(0, sss.length()-4);
 
-                   info.put(ssss,ss);
-
+                   info.put(ssss.trim(),ss);
                  }
 
              }

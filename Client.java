@@ -23,6 +23,7 @@ public class Client {
 
          //System.out.println(in.readUTF());
          System.out.println("Server says " + in.readUTF());
+         System.out.println(in.readUTF());
          client.close();
 
       } catch (IOException e) {
