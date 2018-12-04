@@ -10,7 +10,6 @@ public class Server extends Thread {
    private ServerSocket serverSocket;
    private String name;
    private static Map<String, ArrayList<String>> info = new HashMap<String, ArrayList<String>>();
-   private List<String> songs = new ArrayList<String>();
 
    public Server(int port) throws IOException {
       serverSocket = new ServerSocket(port);
@@ -52,19 +51,21 @@ public class Server extends Thread {
                );
             out.writeUTF("Your request has been recieved successfully");
 
-            int temp = 0;
-            System.out.println("Size is: "+info.size());
+            StringBuilder sb = new StringBuilder();
+
             for(Map.Entry<String, ArrayList<String>> entry : info.entrySet()){
               if(entry.getKey().equals(artist)){
-                temp += 1;
-                //songs.add(entry.getValue());
+                ArrayList<String> strings = entry.getValue();
+                sb.append("The Songs are: ");
+                sb.append("\n");
+                for(String s : strings){
+                  sb.append(s);
+                  sb.append(", ");
+                }
               }
             }
-            out.writeUTF(Integer.toString(temp));
-
-            for(int i=0; i<songs.size(); i++){
-              out.writeUTF(songs.get(i));
-            }
+            System.out.println(sb.toString());
+            out.writeUTF(sb.toString());
 
             server.close();
 
