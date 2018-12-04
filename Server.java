@@ -9,8 +9,7 @@ import java.util.Scanner;
 public class Server extends Thread {
    private ServerSocket serverSocket;
    private String name;
-   private String artist;
-   private Map<String, String> info = new HashMap<String, String>();
+   private static Map<String, String> info = new HashMap<String, String>();
 
    public Server(int port) throws IOException {
       serverSocket = new ServerSocket(port);
@@ -26,7 +25,7 @@ public class Server extends Thread {
 
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
             DataInputStream in = new DataInputStream(server.getInputStream());
-            //BufferedReader is = new BufferedReader(new InputStreamReader(in));
+            //BufferedReader is = new BufferedReader(new InputStreamReader(server.getInputStream()));
             //name = is.readLine();
             //artist = is.readLine();
             //info.get(artist);
@@ -34,13 +33,28 @@ public class Server extends Thread {
             //System.out.println("The name is: "+ name);
             //System.out.println("The artist is: "+ artist);
 
-
-
             System.out.println(in.readUTF());
+            String artist = in.readUTF();
+            System.out.println("The artist is:" + artist+"!");
+
+            //out.wrtieUTF("The request has been received successfully")
+            //Iterator it = info.entrySet().iterator();
+            //while(it.hasNext()){
+              //Map.Entry pair = (Map.Entry).it.next();
+              //if(pair.getKey() == artist){
+                  //System.out.println("The song title is: " + pair.getValue());
+              //}
+              for(Map.Entry<String, String> entry : info.entrySet()){
+                if(entry.getKey().equals(artist)){
+                  System.out.println(entry.getKey()+":" + entry.getValue());
+                  //System.out.println("The songs are: " + entry.getValue());
+                }
+              }
+
             DataOutputStream out = new DataOutputStream(server.getOutputStream());
             out.writeUTF("Thank you for connecting to " + server.getLocalSocketAddress()
                );
-            out.writeUTF("Request has been recieved successfully");
+
             server.close();
 
          } catch (SocketTimeoutException s) {
@@ -104,17 +118,19 @@ public class Server extends Thread {
                    Pattern pp = Pattern.compile("\\s+\\s");
                    Matcher mm = pp.matcher(lines.get(i));
                    if(mm.find()){
-                   //System.out.println(lines.get(i));
                    int start2 = mm.start();
                    int end2 = mm.end();
-                   //System.out.println(start2);
                    String s = lines.get(i).substring(0,start2);
                    String ss = s.substring(4);
                    String sss = lines.get(i).substring(end2);
                    String ssss = sss.substring(0, sss.length()-4);
-                   //info.put(ssss,ss);
+
+                   info.put(ssss,ss);
+
                  }
+
              }
+
            }
       } catch (IOException e) {
          e.printStackTrace();
