@@ -20,6 +20,8 @@ public class Client {
          System.out.println("successfully connected to " + client.getRemoteSocketAddress());
          OutputStream outToServer = client.getOutputStream();
          PrintWriter out = new PrintWriter(outToServer, true);
+         PrintWriter writer = new PrintWriter("client.log", "UTF-8");
+
 
          //Gets the user input of the artist and sends to the Server
          System.out.println("Enter Artist here: ");
@@ -37,9 +39,9 @@ public class Client {
          //while loop while there is still input from the server
          while ((input = in.readLine()) != null) {
            //needs to be logged
-           System.out.println("Server response received on: "+ new Date().toString());
+           writer.println("Server response received on: "+ new Date().toString());
            //needs to be logged
-           System.out.println("The response length was " + input.getBytes().length + " bytes");
+           writer.println("The response length was " + input.getBytes().length + " bytes");
            //checks to see if user want to quit
            if(input.equals("Connection is closed")){
              System.out.println(input);
@@ -47,7 +49,7 @@ public class Client {
              //prints the input from the server
              long end = System.currentTimeMillis();
              //needs to be logged
-             System.out.println("It took " + (end-start)+ " ms to recieve a response from the server the request to get songs");
+             writer.println("It took " + (end-start)+ " ms to recieve a response from the server the request to get songs");
              System.out.println(input);
              //Gets the next input from the user and sends to the Server
              System.out.println("Enter 'quit' to exit");

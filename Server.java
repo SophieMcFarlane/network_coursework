@@ -21,25 +21,25 @@ public class Server extends Thread {
         try (
 
             //connecting to the Client and setting up the stream in and out
-
             Socket server = serverSocket.accept();
 
             BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
             OutputStream outToClient = server.getOutputStream();
             PrintWriter out = new PrintWriter(outToClient, true);
+            PrintWriter writer = new PrintWriter("server.log", "UTF-8");
 
         ) {
             //needs to be logged
-            System.out.println("Date and Time the Server started: "+ new Date().toString());
+            writer.println("Date and Time the Server started: "+ new Date().toString());
 
             System.out.println("Waiting for client on port " +
                serverSocket.getLocalPort() + "...");
             //needs to be logged
-            System.out.println("Date and Time of incomming client connection request: "+ new Date().toString());
+            writer.println("Date and Time of incomming client connection request: "+ new Date().toString());
 
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
             //needs to be logged
-            System.out.println("Connection was successful");
+            writer.println("Connection was successful");
 
             String input;
 
@@ -53,7 +53,7 @@ public class Server extends Thread {
                 //if it matches creates a string of the songs for the chosen artist
                 if(entry.getKey().equals(input)){
                   //needs to be logged
-                  System.out.println("The artist from the client is: "+input);
+                  writer.println("The artist from the client is: "+input);
                   ArrayList<String> strings = entry.getValue();
                   sb.append("The Songs are: ");
                   for(String s : strings){
@@ -67,6 +67,7 @@ public class Server extends Thread {
                 out.println("Connection is closed");
                 server.close();
               }else if(sb.toString().equals("")){
+                writer.println("The artist from the client is: "+input);
                 out.println("No songs for this artist");
               }else{
                 out.println(sb.toString());
@@ -81,7 +82,9 @@ public class Server extends Thread {
            System.out.println("Port already in use");
          } catch(ConnectException c){
            System.out.println("Cant connect to the Server");
-         } catch (IOException e) {
+         } catch (SocketException se){
+           System.out.println("Socket closed");
+         }catch (IOException e) {
             e.printStackTrace();
          }
 
