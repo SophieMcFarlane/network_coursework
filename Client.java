@@ -29,20 +29,29 @@ public class Client {
          BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
          //Prints out the songs from the server
-         System.out.println(in.readLine());
+         String input;
 
-         //Gets the next input from the user and sends to the Server
-         System.out.println("Enter 'quit' to exit");
-         String answer = userInput.nextLine();
-         out.println(answer);
+         //while loop while there is still input from the server
+         while ((input = in.readLine()) != null) {
+           //checks to see if user want to quit
+           if(input.equals("Connection is closed")){
+             System.out.println(input);
+           }else{
+             //prints the input from the server
+             System.out.println(input);
+             //Gets the next input from the user and sends to the Server
+             System.out.println("Enter 'quit' to exit");
+             String answer = userInput.nextLine();
+             out.println(answer);
+           }
+         }
+
+
+
 
          //Reads the data from the Server and decided what to do enxt
-         String incoming = in.readLine();
-         if(incoming.equals("Connection is closed")){
-           System.out.println(incoming);
-         }else{
-           System.out.println(incoming);
-         }
+         //String incoming = in.readLine();
+
 
       } catch (IOException e) {
          e.printStackTrace();
