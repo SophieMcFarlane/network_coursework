@@ -9,41 +9,40 @@ public class Client {
       int port = Integer.parseInt(args[1]);
 
       try {
+
+        //Creates the socket and connects to the Server
          System.out.println("Connecting to " + serverName + " on port " + port);
          Socket client = new Socket(serverName, port);
 
+         //Creates the output stream
          System.out.println("successfully connected to " + client.getRemoteSocketAddress());
          OutputStream outToServer = client.getOutputStream();
          PrintWriter out = new PrintWriter(outToServer, true);
 
-         //out.println("Hello from " + client.getLocalSocketAddress());
+         //Gets the user input of the artist and sends to the Server
          System.out.println("Enter Artist here: ");
-
          Scanner userInput = new Scanner(System.in);
          String artist = userInput.nextLine();
-         //userInput.close();
          out.println(artist);
 
-
+         //Creates the input stream
          BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
+         //Prints out the songs from the server
          System.out.println(in.readLine());
 
-         //Scanner userInput = new Scanner(System.in);
+         //Gets the next input from the user and sends to the Server
          System.out.println("Enter 'quit' to exit");
          String answer = userInput.nextLine();
          out.println(answer);
+
+         //Reads the data from the Server and decided what to do enxt
          String incoming = in.readLine();
          if(incoming.equals("Connection is closed")){
            System.out.println(incoming);
-           client.close();
+         }else{
+           System.out.println(incoming);
          }
-         System.out.println(in.readLine());
-         //client.close();
-         //if (answer.equals("quit")){
-           //client.close();
-         //}
-
 
       } catch (IOException e) {
          e.printStackTrace();

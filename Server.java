@@ -19,7 +19,7 @@ public class Server extends Thread {
    public void run() {
 
         try (
-
+            //connecting to the Client and setting up the stream in and out
             Socket server = serverSocket.accept();
             BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
             OutputStream outToClient = server.getOutputStream();
@@ -33,12 +33,15 @@ public class Server extends Thread {
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
             String input;
 
+            //while there is input coming in from the Client
             while ((input = in.readLine()) != null) {
               StringBuilder sb = new StringBuilder();
-              int temp = 0;
+
+              //loops through the map of the artist and songs to see if it matches
               for(Map.Entry<String, ArrayList<String>> entry : info.entrySet()){
+
+                //if it matches creates a string of the songs for the chosen artist
                 if(entry.getKey().equals(input)){
-                  temp += 1;
                   ArrayList<String> strings = entry.getValue();
                   sb.append("The Songs are: ");
                   for(String s : strings){
@@ -46,6 +49,8 @@ public class Server extends Thread {
                   }
                 }
               }
+
+              //reads the input and sends the right response to the Client
               if(input.equals("quit")){
                 out.println("Connection is closed");
                 server.close();
@@ -56,7 +61,6 @@ public class Server extends Thread {
               }
             }
 
-            //server.close();
 
 
          } catch (SocketTimeoutException s) {
@@ -72,28 +76,33 @@ public class Server extends Thread {
       File file = new File("100worst.txt");
 
       try{
-
+        //Reads in the file
          FileReader fileReader = new FileReader(file);
-
          BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+         //Creates a list of the lines in the file and the song titles
          List<String> lines = new ArrayList<String>();
          List<String> titles = new ArrayList<String>();
          String line = null;
 
+         //adds the lines of the file to the list of lines
          while((line = bufferedReader.readLine()) != null){
             lines.add(line);
          }
 
          bufferedReader.close();
 
+         //removes the irrelevant lines at the top
          for(int i=0; i<6; i++){
            lines.remove(0);
          }
 
+         //removes the irrelevant lines at the bottom
          for(int i=0; i<23; i++){
            lines.remove(lines.size()-1);
          }
 
+         //runs through the lines and finds the white space
          for(int i=0; i<lines.size(); i++){
            String temp = lines.get(i);
            Pattern p = Pattern.compile("\\s+\\s");
@@ -104,6 +113,8 @@ public class Server extends Thread {
              int start = m.start();
              int end = m.end();
 
+             //finds the artist and title that run over 2 lines
+             //joins the 2 lines together
              if(start == 0){
                String t = lines.get(i-1);
                String tt = lines.get(i);
@@ -114,28 +125,30 @@ public class Server extends Thread {
 
              }
 
-                   Pattern pp = Pattern.compile("\\s+\\s");
-                   Matcher mm = pp.matcher(lines.get(i));
-                   if(mm.find()){
-                     int start2 = mm.start();
-                     int end2 = mm.end();
-                     String s = lines.get(i).substring(0,start2);
-                     String ss = s.substring(4);
-                     String sss = lines.get(i).substring(end2);
-                     String ssss = sss.substring(0, sss.length()-4);
+             //finds the whitespace and separtes into artist and title
+             Pattern pp = Pattern.compile("\\s+\\s");
+             Matcher mm = pp.matcher(lines.get(i));
+             if(mm.find()){
+               int start2 = mm.start();
+               int end2 = mm.end();
+               String s = lines.get(i).substring(0,start2);
+               String ss = s.substring(4);
+               String sss = lines.get(i).substring(end2);
+               String ssss = sss.substring(0, sss.length()-4);
 
-                    ArrayList<String> values = info.get(ssss.trim());
+               ArrayList<String> values = info.get(ssss.trim());
 
-                    if(values == null){
-                      values = new ArrayList<String>();
-                      values.add(ss);
-                      info.put(ssss.trim(), values);
-                    }else{
-                      values.add(ss);
-                      info.put(ssss.trim(), values);
-                    }
-
-                 }
+               //creates an arraylist for the map if one isnt already made
+               //adds the artist and songs to the map
+               if(values == null){
+                 values = new ArrayList<String>();
+                 values.add(ss);
+                 info.put(ssss.trim(), values);
+               }else{
+                 values.add(ss);
+                 info.put(ssss.trim(), values);
+               }
+              }
              }
            }
       } catch (IOException e) {
