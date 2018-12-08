@@ -19,18 +19,28 @@ public class Server extends Thread {
    public void run() {
 
         try (
+
             //connecting to the Client and setting up the stream in and out
+
             Socket server = serverSocket.accept();
+
             BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
             OutputStream outToClient = server.getOutputStream();
             PrintWriter out = new PrintWriter(outToClient, true);
 
         ) {
+            //needs to be logged
+            System.out.println("Date and Time the Server started: "+ new Date().toString());
 
             System.out.println("Waiting for client on port " +
                serverSocket.getLocalPort() + "...");
+            //needs to be logged
+            System.out.println("Date and Time of incomming client connection request: "+ new Date().toString());
 
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
+            //needs to be logged
+            System.out.println("Connection was successful");
+
             String input;
 
             //while there is input coming in from the Client
@@ -42,6 +52,8 @@ public class Server extends Thread {
 
                 //if it matches creates a string of the songs for the chosen artist
                 if(entry.getKey().equals(input)){
+                  //needs to be logged
+                  System.out.println("The artist from the client is: "+input);
                   ArrayList<String> strings = entry.getValue();
                   sb.append("The Songs are: ");
                   for(String s : strings){
@@ -64,7 +76,7 @@ public class Server extends Thread {
 
 
          } catch (SocketTimeoutException s) {
-            System.out.println("Socket timed out!");
+          System.out.println("Socket timed out!");
          } catch (BindException b){
            System.out.println("Port already in use");
          } catch(ConnectException c){
