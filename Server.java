@@ -18,13 +18,12 @@ public class Server extends Thread {
 
    public void run() {
 
-
-
         try (
 
             Socket server = serverSocket.accept();
             BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
-            PrintWriter out = new PrintWriter(server.getOutputStream(), true);
+            OutputStream outToClient = server.getOutputStream();
+            PrintWriter out = new PrintWriter(outToClient, true);
 
         ) {
 
@@ -32,66 +31,34 @@ public class Server extends Thread {
                serverSocket.getLocalPort() + "...");
 
             System.out.println("Just connected to " + server.getRemoteSocketAddress());
-
             String input;
 
             while ((input = in.readLine()) != null) {
               StringBuilder sb = new StringBuilder();
+              int temp = 0;
               for(Map.Entry<String, ArrayList<String>> entry : info.entrySet()){
                 if(entry.getKey().equals(input)){
+                  temp += 1;
                   ArrayList<String> strings = entry.getValue();
                   sb.append("The Songs are: ");
-                  sb.append("\n");
+                  //sb.append("\n");
                   for(String s : strings){
-                    sb.append(s);
-                    sb.append("\n");
+                    sb.append(s+", ");
+                    //sb.append(", ");
                   }
                 }
               }
               System.out.println(sb.toString());
               out.println(sb.toString());
-              //System.out.println(input);
-
             }
-            //BufferedReader is = new BufferedReader(new InputStreamReader(server.getInputStream()));
-            //name = is.readLine();
-            //artist = is.readLine();
-            //info.get(artist);
-
-            //System.out.println("The name is: "+ name);
-            //System.out.println("The artist is: "+ artist);
-
-            System.out.println(in.readLine());
-            String artist = in.readLine();
-            System.out.println(artist);
-
-            //out.wrtieUTF("The request has been received successfully")
-            //Iterator it = info.entrySet().iterator();
-            //while(it.hasNext()){
-              //Map.Entry pair = (Map.Entry).it.next();
-              //if(pair.getKey() == artist){
-                  //System.out.println("The song title is: " + pair.getValue());
-              //}
-
-
-
-            out.println("Thank you for connecting to " + server.getLocalSocketAddress()
-               );
-            out.println("Your request has been recieved successfully");
-
-
-
-
-            //out.println
 
             server.close();
 
+
          } catch (SocketTimeoutException s) {
             System.out.println("Socket timed out!");
-            //break;
          } catch (IOException e) {
             e.printStackTrace();
-            //break;
          }
 
    }
@@ -137,13 +104,12 @@ public class Server extends Thread {
                String t = lines.get(i-1);
                String tt = lines.get(i);
                String ttt = t+tt;
-               //System.out.println(ttt);
+
                lines.remove(i-1);
                lines.add(i, (ttt));
-               //lines.remove(i);
+
              }
-               //System.out.println(lines.get(i));
-               //need to use start of the line before or resuse matcher and pattern
+
                    Pattern pp = Pattern.compile("\\s+\\s");
                    Matcher mm = pp.matcher(lines.get(i));
                    if(mm.find()){
