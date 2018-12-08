@@ -65,6 +65,10 @@ public class Server extends Thread {
 
          } catch (SocketTimeoutException s) {
             System.out.println("Socket timed out!");
+         } catch (BindException b){
+           System.out.println("Port already in use");
+         } catch(ConnectException c){
+           System.out.println("Cant connect to the Server");
          } catch (IOException e) {
             e.printStackTrace();
          }
