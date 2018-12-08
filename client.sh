@@ -1,3 +1,3 @@
 #!/bin/bash
 javac -cp ././Client.java
-java Client
+java Client localHost 6066

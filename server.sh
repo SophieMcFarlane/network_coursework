@@ -1,3 +1,3 @@
 #!/bin/bash
 javac -cp ././Server.java
-java Server
+java Server 6066
