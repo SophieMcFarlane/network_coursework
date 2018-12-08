@@ -21,7 +21,7 @@ public class Client {
 
          Scanner userInput = new Scanner(System.in);
          String artist = userInput.nextLine();
-         userInput.close();
+         //userInput.close();
          out.println(artist);
 
 
@@ -29,7 +29,21 @@ public class Client {
 
          System.out.println(in.readLine());
 
-         client.close();
+         //Scanner userInput = new Scanner(System.in);
+         System.out.println("Enter 'quit' to exit");
+         String answer = userInput.nextLine();
+         out.println(answer);
+         String incoming = in.readLine();
+         if(incoming.equals("Connection is closed")){
+           System.out.println(incoming);
+           client.close();
+         }
+         System.out.println(in.readLine());
+         //client.close();
+         //if (answer.equals("quit")){
+           //client.close();
+         //}
+
 
       } catch (IOException e) {
          e.printStackTrace();

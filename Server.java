@@ -41,18 +41,22 @@ public class Server extends Thread {
                   temp += 1;
                   ArrayList<String> strings = entry.getValue();
                   sb.append("The Songs are: ");
-                  //sb.append("\n");
                   for(String s : strings){
                     sb.append(s+", ");
-                    //sb.append(", ");
                   }
                 }
               }
-              System.out.println(sb.toString());
-              out.println(sb.toString());
+              if(input.equals("quit")){
+                out.println("Connection is closed");
+                server.close();
+              }else if(sb.toString().equals("")){
+                out.println("No songs for this artist");
+              }else{
+                out.println(sb.toString());
+              }
             }
 
-            server.close();
+            //server.close();
 
 
          } catch (SocketTimeoutException s) {
