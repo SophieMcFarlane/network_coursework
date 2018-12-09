@@ -54,6 +54,7 @@ public class Server extends Thread {
                 if(entry.getKey().equals(input)){
                   //needs to be logged
                   writer.println("The artist from the client is: "+input);
+
                   ArrayList<String> strings = entry.getValue();
                   sb.append("The Songs are: ");
                   for(String s : strings){

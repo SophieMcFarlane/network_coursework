@@ -36,20 +36,25 @@ public class Client {
          //Prints out the songs from the server
          String input;
 
-         //while loop while there is still input from the server
+         //while there is still input from the server
          while ((input = in.readLine()) != null) {
+
            //needs to be logged
            writer.println("Server response received on: "+ new Date().toString());
+
            //needs to be logged
            writer.println("The response length was " + input.getBytes().length + " bytes");
+
            //checks to see if user want to quit
            if(input.equals("Connection is closed")){
              System.out.println(input);
            }else{
              //prints the input from the server
              long end = System.currentTimeMillis();
+
              //needs to be logged
              writer.println("It took " + (end-start)+ " ms to recieve a response from the server the request to get songs");
+
              System.out.println(input);
              //Gets the next input from the user and sends to the Server
              System.out.println("Enter 'quit' to exit");
