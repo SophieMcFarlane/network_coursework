@@ -124,9 +124,9 @@ public class Server extends Thread {
 
          //runs through the lines and finds the white space
          for(int i=0; i<lines.size(); i++){
-           String temp = lines.get(i);
+           String currentLine = lines.get(i);
            Pattern p = Pattern.compile("\\s+\\s");
-           Matcher m = p.matcher(temp);
+           Matcher m = p.matcher(currentLine);
            List<String> stuff = new ArrayList<String>();
 
            if(m.find()){
@@ -137,11 +137,10 @@ public class Server extends Thread {
              //joins the 2 lines together
              if(start == 0){
                String t = lines.get(i-1);
-               String tt = lines.get(i);
-               String ttt = t+tt;
+               String tt = t+currentLine;
 
                lines.remove(i-1);
-               lines.add(i, (ttt));
+               lines.add(i, (tt));
 
              }
 
