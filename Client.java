@@ -62,7 +62,7 @@ public class Client {
              out.println(answer);
            }
          }
-
+         writer.close();
       //Handles errors
       } catch (BindException b){
         System.out.println("Port already in use");
