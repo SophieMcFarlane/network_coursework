@@ -1,3 +1,3 @@
 #!/bin/bash
-javac -cp ././Client.java
-java Client localHost 6066
+javac -cp ./ -sourcepath ./ Client.java
+java -cp ./ Client localHost 6066

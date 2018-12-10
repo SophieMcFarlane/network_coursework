@@ -1,3 +1,3 @@
 #!/bin/bash
-javac -cp ././Server.java
+javac -cp ./ -sourcepath ./ Server.java
 java Server 6066
