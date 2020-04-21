@@ -11,18 +11,18 @@ You are required to implement a Client-Server system. Your system should include
 following:
 
 Server Program.
- Write a server program in Java.
- Once the server starts, it is passed a text file enlisting artists plus their songs which is read in and held in a map, i.e. the map holds tuples of type artist-song.
- The server must listen at a predefined host and port (you can specify the server
+- Write a server program in Java.
+- Once the server starts, it is passed a text file enlisting artists plus their songs which is read in and held in a map, i.e. the map holds tuples of type artist-song.
+- The server must listen at a predefined host and port (you can specify the server
 name (local host) and port in your program) for incoming TCP/IP requests.
- Client program(s) connecting to the server will communicate with it via the local host
+- Client program(s) connecting to the server will communicate with it via the local host
 and the specified port.
- The server receives an artist name from client and finds all the song(s) associated to
+- The server receives an artist name from client and finds all the song(s) associated to
 that artist.
- The server informs client(s) that it received the request successfully.
- The server retrieves the required information (songs associate to a given artist) from
+- The server informs client(s) that it received the request successfully.
+- The server retrieves the required information (songs associate to a given artist) from
 the text file and returns the result to the client.
- The server should handle situations such as unavailable/busy ports, client requesting
+- The server should handle situations such as unavailable/busy ports, client requesting
 a non-existing artist in the input file and no songs associated to a given artist.
 
 Client program
